@@ -7,9 +7,9 @@ TESTS=test/validOutput test/test.c test/test.sh
 
 all: build tests
 
-build: $(SOURCES)
+build: $(SOURCES) $(MAIN)
 	$(CC) $(MAIN) $(SOURCES) -o $(EXECUTABLE)
 
-tests: $(TESTS)
+tests: $(TESTS) $(SOURCES)
 	$(CC) $(SOURCES) $(TESTMAIN) -o test/tests
 	bash test/test.sh
