@@ -27,6 +27,7 @@ errorBuf* checkDiv3And5(FILE* stream, char *checkStr) {
         if(!isdigit(checkStr[numCounter])) {
             return makeErrorBuf(NOT_NUMBER_ERROR, checkStr);
         }
+        
         //overflow protection
         if(numCounter == getMaxNumberLength()) {  
             return makeErrorBuf(LONG_NUMBER_ERROR, checkStr);
@@ -40,6 +41,7 @@ errorBuf* checkDiv3And5(FILE* stream, char *checkStr) {
         fprintf(stream, "0 ");
         return makeErrorBuf(OK, NULL);
     }
+    
     int fizzFlag = isDiv3(sumDigits);
     int buzzFlag = isDiv5(checkStr, numCounter - 1);
 
@@ -54,12 +56,8 @@ errorBuf* checkDiv3And5(FILE* stream, char *checkStr) {
 //Checking division by 5
 //Used the sing of division by 3, last digit should be 0 or 5
 int isDiv5(char *checkStr, int numCounter) {
-    if(checkStr[numCounter] == '0' || checkStr[numCounter] == '5') {
-        return 1;
-    }
-    else {
-        return 0;
-    }
+    if(checkStr[numCounter] == '0' || checkStr[numCounter] == '5') return 1;
+    else return 0;
 }
 
 //Checking division by 3
@@ -86,15 +84,10 @@ int printResults(FILE* stream, char *numStr, int fizzFlag, int buzzFlag) {
 //Function, that unites validation of all numbers and checking div by 3 and 5
 errorBuf* checkAllDataOnDivision(FILE* stream, int argc, char **argv) {
     
-    if(argc <= 1) {
+    if(argc <= 1)
         return makeErrorBuf(ARGC_ERROR, NULL);
-    }
-    if(argv == NULL) {
-        return makeErrorBuf(ARGV_NULL_PTR_ERROR, NULL);
-    }
-    if(stream == NULL) {
+    if(stream == NULL)
         return makeErrorBuf(OUTPUT_STREAM_ERROR, NULL);
-    }
 
     //Checking every number
     int i = 1;
@@ -113,15 +106,15 @@ errorBuf* checkAllDataOnDivision(FILE* stream, int argc, char **argv) {
 
 //Skip first plus or minus in string
 int skipPlusAndMinus(int *numCounter, char *checkStr) {
-    if(checkStr[0] == '-' || checkStr[0] == '+') {
+    if(checkStr[0] == '-' || checkStr[0] == '+')
         *numCounter = 1;
-    }
     return OK;
 }
 
 
 //Return max number of digits
 //Use in int overflow protection
+//can be less than 240k
 int getMaxNumberLength() {
     return 9;
 }
@@ -132,6 +125,7 @@ int printInputData(FILE* stream, int argc, char **argv) {
         printf("printInputData(): Output stream is equal to NULL\n");
         return OUTPUT_STREAM_ERROR;
     }
+    
     int i = 1;
     for(i = 1; i < argc; i++) {
         fprintf(stream, "%s ", argv[i]);

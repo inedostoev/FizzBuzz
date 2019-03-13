@@ -5,13 +5,10 @@
 #include<stdlib.h>
 #include<ctype.h>
 
-
-//Errors numbers, first number OK means that all is good
 enum Errors {
     OK,
     OUTPUT_STREAM_ERROR,
     ARGC_ERROR,
-    ARGV_NULL_PTR_ERROR,
     STR_NULL_PTR_ERROR,
     NOT_NUMBER_ERROR,
     LONG_NUMBER_ERROR,
@@ -19,7 +16,7 @@ enum Errors {
     
 };
 
-//struct for detecting errors
+
 typedef struct errorBuf {
 
     char *errorStr;
